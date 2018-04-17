@@ -32,6 +32,8 @@ exports.notice = (comment) => {
         if (error) {
             return console.log(error);
         }
+        comment.set('isNotified', true);
+        comment.save();
     });
 }
 
@@ -65,7 +67,5 @@ exports.send = (currentComment, parentComment)=> {
             return console.log(error);
         }
         console.log('邮件 %s 成功发送: %s', info.messageId, info.response);
-        currentComment.set('isNotified', true);
-        currentComment.save();
     });
 };
