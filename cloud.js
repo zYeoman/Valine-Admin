@@ -17,12 +17,12 @@ AV.Cloud.afterSave('Comment', function (request) {
     if (comment.indexOf("class=\"at\"") != -1) {
         var start = comment.indexOf("#") + 1;
         var end = comment.substr(start).indexOf("'");
-        comment.substr(start, end);
+        rid = comment.substr(start, end);
         console.log(comment.substr(start, end));
     } else {
         console.log("not @");
     }
-
+    console.log(rid);
     if (!rid) {
         console.log('没有@任何人，结束!');
         return;
