@@ -5,12 +5,26 @@ const spam = require('./utilities/check-spam');
 AV.Cloud.afterSave('Comment', function (request) {
     let currentComment = request.object;
     // 检查垃圾评论
-    spam.checkSpam(currentComment);
+    // spam.checkSpam(currentComment);
 
     // 发送博主通知邮件
     mail.notice(currentComment);
+    
     // AT评论通知
+    let comment = currentComment.get('comment');
+    
     let rid = currentComment.get('rid');
+   
+    if (comment.indexOf("<a class=\"at\" href=\"#") != -1) {
+        index = comment.indexOf("<a class=\"at\" href=\"#");
+        var start = comment.indexOf("#") + 1;
+        var end = comment.substr(start).indexOf('"');
+        comment.substr(start, end);
+        console.log(comment.substr(start, end));
+    } else {
+        console.log("not @");
+    }
+
     if (!rid) {
         console.log('没有@任何人，结束!');
         return;
