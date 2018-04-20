@@ -14,12 +14,9 @@ AV.Cloud.afterSave('Comment', function (request) {
     let comment = currentComment.get('comment');
     
     let rid = currentComment.get('rid');
-    console.log(comment);
-    console.log(comment.indexOf("<a class=\"at\" href=\"#"));
-    if (comment.indexOf("<a class=\"at\" href=\"#") != -1) {
-        index = comment.indexOf("<a class=\"at\" href=\"#");
+    if (comment.indexOf("class=\"at\"") != -1) {
         var start = comment.indexOf("#") + 1;
-        var end = comment.substr(start).indexOf('"');
+        var end = comment.substr(start).indexOf("'");
         comment.substr(start, end);
         console.log(comment.substr(start, end));
     } else {
