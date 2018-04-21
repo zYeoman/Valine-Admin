@@ -13,12 +13,14 @@ router.get('/', function (req, res, next) {
         query.find().then(function (results) {
             res.render('comments', {
                 title: process.env.SITE_NAME + '上的评论',
+                domain: process.env.SITE_URL,
                 comment_list: results
             });
         }, function (err) {
             if (err.code === 101) {
                 res.render('comments', {
                     title: process.env.SITE_NAME + '上的评论',
+                    domain: process.env.SITE_URL,
                     comment_list: []
                 });
             } else {
