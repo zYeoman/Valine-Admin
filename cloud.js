@@ -8,6 +8,7 @@ AV.Cloud.afterSave('Comment', function (request) {
 
     // 发送博主通知邮件
     mail.notice(currentComment);
+    console.log("已提醒站长");
     
     // AT评论通知
     let rid;
@@ -28,7 +29,12 @@ AV.Cloud.afterSave('Comment', function (request) {
     // 查 @ 的人的邮箱, 并发送邮件.
     let query = new AV.Query('Comment');
     query.get(rid).then(function (parentComment) {
-        mail.send(currentComment, parentComment);
+        if (parentComment.get('mail')) {
+            mail.send(currentComment, parentComment);
+            console.log("@ 了其他人, 已提醒:" + parentComment.get('mail'));
+        } else {
+            console.log("@ 了其他人，但这个人没留邮箱... 无法通知");
+        }
     }, function (error) {
         console.warn('好像 @ 了一个不存在的人!');
     });
