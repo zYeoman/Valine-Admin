@@ -23,7 +23,7 @@ exports.notice = (comment) => {
         + '</div><p><a style="text-decoration:none; color:#12addb" href="'
         + process.env.SITE_URL
         + comment.get('url')
-        + '" target="_blank">点击前往查看</a></p>  \n' +
+        + '#comments" target="_blank">点击前往查看</a></p>  \n' +
         '    </div>  \n' +
         '</div>';
 
@@ -59,7 +59,7 @@ exports.send = (currentComment, parentComment)=> {
         + '</div>'
         + '<p>您可以点击 <a style="text-decoration:none; color:#12addb" href="'
         + process.env.SITE_URL + currentComment.get('url')
-        + '" target="_blank">查看回复的完整內容 </a>，欢迎再次光临 <a style="text-decoration:none; color:#12addb" href="' + process.env.SITE_URL +'" target="_blank">' + process.env.SITE_NAME +'</a>。<br>本邮件为系统自动发送，请勿直接回复。</p>  \n' +
+        + '#comments" target="_blank">查看回复的完整內容 </a>，欢迎再次光临 <a style="text-decoration:none; color:#12addb" href="' + process.env.SITE_URL +'" target="_blank">' + process.env.SITE_NAME +'</a>。<br>本邮件为系统自动发送，请勿直接回复。</p>  \n' +
         '    </div>  \n' +
         '</div>';
 
