@@ -1,7 +1,7 @@
 # Valine Admin
 使用 LeanCloud 存储你的评论数据，在 LeanEngine 云引擎上管理你的评论，包括邮件通知和垃圾评论标记。
 
-这是用于 [Valine 评论](https://valine.js.org/quickstart/) 的后台管理，可以部署到你的 LeanCloud。它可以帮你完成：
+这是用于 [Valine 评论](https://valine.js.org/) 的后台管理，可以部署到你的 LeanCloud。它可以帮你完成：
 
 - 更好用的邮件通知：包括新评论通知和@评论通知
 - 评论管理
@@ -24,7 +24,7 @@
 
 ## 前置工作
 
-配置 Valine 评论，我这里就不再多说了，很多主题都已经继承了，请参考 [Valine 文档](https://valine.js.org/quickstart/)。
+配置 Valine 评论，我这里就不再多说了，很多主题都已经集成了，请参考 [Valine 文档](https://valine.js.org/quickstart/)。
 
 
 ## 食用方法
