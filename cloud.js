@@ -1,6 +1,5 @@
 const AV = require('leanengine');
 const mail = require('./utilities/send-mail');
-const spam = require('./utilities/check-spam');
 
 AV.Cloud.afterSave('Comment', function (request) {
     let currentComment = request.object;
@@ -11,26 +10,26 @@ AV.Cloud.afterSave('Comment', function (request) {
     mail.notice(currentComment);
     
     // AT评论通知
-    let comment = currentComment.get('comment');
+    let rid;
     
-    let rid = currentComment.get('rid');
+    // 拿到评论内容
+    let comment = currentComment.get('comment');
+
+    // 判断是否包含 class="at", 如包含则表示 @ 了别人, 截取 @ 的邮箱 hash 值
     if (comment.indexOf("class=\"at\"") != -1) {
-        var start = comment.indexOf("#") + 1;
-        var end = comment.substr(start).indexOf("'");
+        let start = comment.indexOf("#") + 1;
+        let end = comment.substr(start).indexOf("'");
         rid = comment.substr(start, end);
-        console.log(comment.substr(start, end));
     } else {
-        console.log("not @");
-    }
-    console.log(rid);
-    if (!rid) {
-        console.log('没有@任何人，结束!');
+        console.log("没有 @ 任何人");
         return;
     }
+    
+    // 查 @ 的人的邮箱, 并发送邮件.
     let query = new AV.Query('Comment');
     query.get(rid).then(function (parentComment) {
         mail.send(currentComment, parentComment);
     }, function (error) {
-        console.warn('获取@对象失败！');
+        console.warn('好像 @ 了一个不存在的人!');
     });
 });
