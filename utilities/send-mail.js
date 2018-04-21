@@ -74,7 +74,6 @@ exports.send = (currentComment, parentComment)=> {
         if (error) {
             return console.log(error);
         }
-        console.log('邮件成功发送: %s', info.messageId, info.response);
         currentComment.set('isNotified', true);
         currentComment.save();
     });
