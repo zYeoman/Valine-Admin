@@ -29,7 +29,7 @@ exports.notice = (comment) => {
 
     let mailOptions = {
         from: '"' + process.env.SENDER_NAME + '" <' + process.env.SENDER_EMAIL + '>',
-        to: process.env.SENDER_EMAIL,
+        to: process.env.TO_EMAIL,
         subject: emailSubject,
         html: emailContent
     };
