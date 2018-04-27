@@ -43,6 +43,9 @@ exports.notice = (comment) => {
 
 // 发送邮件通知他人
 exports.send = (currentComment, parentComment)=> {
+    if (parentComment.get('mail') === process.env.TO_EMAIL) {
+        console.log("站长被 @, 已提醒站长, 不用额外发邮件通知站长");
+    }
     let emailSubject = '👉 叮咚！「' + process.env.SITE_NAME + '」上有人@了你';
     let emailContent = '<div style="border-top:2px solid #12ADDB;box-shadow:0 1px 3px #AAAAAA;line-height:180%;padding:0 15px 12px;width:500px;margin:50px auto;font-size:12px;">  \n' +
         '    <h2 style="border-bottom:1px solid #DDD;font-size:14px;font-weight:normal;padding:13px 0 10px 8px;"><span style="color: #12ADDB;font-weight: bold;">&gt; \n' +
