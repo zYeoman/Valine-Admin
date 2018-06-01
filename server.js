@@ -2,7 +2,6 @@
 
 var AV = require('leanengine');
 var mail = require('./utilities/send-mail');
-var spam = require('./utilities/check-spam');
 
 AV.init({
   appId: process.env.LEANCLOUD_APP_ID,
@@ -23,8 +22,6 @@ let query = new AV.Query(AV.Object.extend('Comment'));
 query.equalTo('isNotified', null);
 query.find().then(function (results) {
     results.forEach(function(currentComment){
-        // 检查垃圾评论
-        spam.checkSpam(currentComment);
 
         // 发送博主通知邮件
         mail.notice(currentComment);
